@@ -4,25 +4,62 @@
     <title>Tests With Selenium and RobotFramework</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
-      @import url(https://fonts.googleapis.com/css?family=Roboto);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      @import url(http://fonts.googleapis.com/css?family=Roboto);
+      @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400);
 
-      body { font-family: 'Droid Serif'; }
-      table, th, td {
-        border: 1px solid black;
-      }
-      h1, h2, h3 {
+      body {
         font-family: 'Roboto';
-        font-weight: normal;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: 300;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      td, th {
+        border: 1px solid black;
+        padding: 2px;
+      }
+      a {
+        text-decoration: none;
+        color: blue;
+      }
+      li {
+        margin: 10px;
+      }
+
+      .key-idea {
+        font-size: 200%;
+        color: red;
+        margin-left: auto;
+        margin-right: auto;
       }
       .footnote {
-        float: right
+        position: absolute;
+        bottom: 60px;
+        right: 80px;
       }
-      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code, .remark-inline-code {
+        font-family: 'Source Code Pro';
+        font-weight: normal;
+        color: green;
+      }
       .impact {
         color: blue;
         font-weight: bold;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 30%;
+        height: 92%;
+        float: left;
+        vertical-align: top;
+      }
+      .right-column {
+        float: right;
+        vertical-align: top;
       }
     </style>
   </head>
@@ -33,11 +70,15 @@ class: center, middle
 ---
 # Tests With Selenium and RobotFramework
 
-.footnote[by Soonoh]
+.footnote[
+  by [Soonoh+]()
+]
 ---
 layout: false
+class: center, middle
 # Issues
 
+---
 ## Everyone has their own documents
 
 - Product Manager - Specs
@@ -45,7 +86,9 @@ layout: false
 - QA - Test cases, Test reports.
 - Developer - Issues on issue manager.
 
-=> Define Single Source of Truth.
+---
+class: center, middle
+.key-idea[Define Single Source of Truth.]
 
 ---
 ## Blocking others
@@ -53,7 +96,9 @@ layout: false
 - QA - The product is not ready to test.
 - Developer - The spec is not enough to implement.
 
-=> Work concurrently and collaboratively
+---
+class: center, middle
+.key-idea[Work concurrently and collaboratively]
 
 ---
 ## Not Automated, not repetitive
@@ -61,13 +106,18 @@ layout: false
 - Developer - How can I reproduce?
 - QA - Blah, blah, ... well... I am not sure.
 
-=> Automate Tests, Reproduce every time.
 ---
+class: center, middle
+.key-idea[Automate Tests, Reproduce every time.]
+
+---
+class: center, middle
 # Demo app
 
-https://bitbucket.org/robotframework/webdemo/wiki/Home
-
+---
 ## Installation
+
+https://bitbucket.org/robotframework/webdemo/wiki/Home
 
 For easy installation, use chocolatey in Windows.
 Install Python 2.7 or higher (Tested 2.7 in Windows 7)
@@ -101,26 +151,29 @@ http://localhost:7272
 We will continue with this webdemo app later.
 
 ---
-# Selenium
+class: center, middle
+# Automate Web Test With Selenium IDE
+
+---
+## Selenium
 
 Browser automation framework.
 
 - Selenium IDE
 - Selenium WebDriver (java, python, ruby, ...)
 - Selenium Server
-
 ---
-## WebDriver
-
-This specification defines the WebDriver API, a platform and language-neutral interface and associated wire protocol that allows programs or scripts to introspect into, and control the behaviour of, a web browser.
-
----
-## Selenium IDE (Manual: http://docs.seleniumhq.org/docs/02_selenium_ide.jsp)
+## Selenium IDE
 
 Selenium IDE is a Firefox browser plugin.
 
+- Record & Run Tests
+- Auto Locator, Command Manual
+
+[User Manual](http://docs.seleniumhq.org/docs/02_selenium_ide.jsp)
+
 ---
-### Installing
+## Installing
 
 - open following URL in Firefox browser
 
@@ -137,7 +190,7 @@ http://www.seleniumhq.org/download/
 http://www.askqtp.com/2013/02/how-to-install-selenium-ide-in-firefox.html
 
 ---
-### Building Test Cases
+## Building Test Cases
 
 Let's go back to our demo app.
 
@@ -160,7 +213,7 @@ Valid_Login_Test
 | verifyTitle        | Welcome Page      |                                                  |
 | verifyText         | css=p             | Login succeeded. Now you can logout.             |
 | verifyText         | link=logout       | logout                                           |
-| clickAndWait       | link=logout       |                                                  |
+| clickAndWait       | link=logout       | &nbsp;                                           |
 
 Invalid_Login_Test
 
@@ -174,11 +227,11 @@ Invalid_Login_Test
 | verifyText         | css=p             | Login failed. Invalid user name and/or password. |
 
 ---
-### Selenese
+## Selenese
 
 Selenese is the set of Selenium commands.
 
-#### Commands
+### Commands
 
 - Actions
   ```
@@ -199,7 +252,7 @@ Selenese is the set of Selenium commands.
 [Selenese Command Reference](http://release.seleniumhq.org/selenium-core/1.0.1/reference.html)
 
 ---
-#### Syntax
+### Syntax
 
 Selenium scripts that will be run from Selenium-IDE will be stored in an HTML text file format. This consists of an HTML table with three columns.
 
@@ -207,40 +260,49 @@ command, target, value
 
 target is usually Locator
 ---
-Locator
+### Locator
 
-- Identifier
+.left-column[
+Identifier
   ```
   identifier=loginForm
   loginForm
   ```
-- Id
+Id
   ```
   id=loginForm
   ```
-- Name
+Name
   ```
   name=username
   ```
-- XPath
+XPath
   ```
   xpath=/html/bodoy/form[1]
   //input[@name='username']
   ```
-- Link Text
+
+]
+.right-column[
+Link Text
   ```
   link=Continue
   ```
-- DOM
+DOM
   ```
   dom=document.getElementById('loginForm')
   ```
-- CSS
+CSS
   ```
   css=form#loginForm
   ```
+]
 ---
-# Robot Framework
+class: center, middle
+# Writes Acceptance Tests With Robot Framework
+
+---
+## Robot Framework
 
 Robot Framework is a generic open source test automation framework for acceptance testing and acceptance test-driven development (ATDD). It has easy-to-use tabular test data syntax and it utilizes the keyword-driven testing approach.
 
@@ -256,14 +318,17 @@ Robot Framework is a generic open source test automation framework for acceptanc
 - Selenium2Labrary
 
 ---
-Install RobotFramework and Selenium Library.
+# Install
+
+Install RobotFramework and Selenium2 Library.
+
 ```
 pip install robotframework
 pip install robotframework-selenium2library
 ```
 
 ---
-Demo
+## Demo
 
 Let's go back to our demo app and run RobotFramework tests.
 
@@ -278,7 +343,7 @@ pybot login_tests/
 ```
 
 ---
-Test Case Example
+## Test Case
 
 ```ruby
 **** Settings ***
@@ -298,6 +363,8 @@ Valid Login
     [Teardown]    Close Browser
 ```
 ---
+## Resource
+
 ```ruby
 **** Settings ***
 Documentation     A resource file with reusable keywords and variables.
@@ -334,7 +401,6 @@ Go To Login Page
     Login Page Should Be Open
 ```
 ---
-=> Keywords
 ```ruby
 Input Username
     [Arguments]    ${username}
@@ -357,16 +423,17 @@ Selenium2Library Keywords References:
 http://rtomac.github.io/robotframework-selenium2library/doc/Selenium2Library.html#Wait%20Until%20Page%20Contains
 
 ---
+class: center, middle
+# Implementation in Small Team
+
+Just Put Two Cents In
+
+---
 ## Specification by example
 
 * Collaborative Approach
 * Using Realistic Examples
 * Creating a single source of truth
-
----
-# Implementation in Small Team
-
-Practice SBE with Selenium IDE and RobotFramework.
 
 ---
 ## Roles
@@ -406,6 +473,23 @@ Development - CI - QA
 - Development progress = How many tests passed
 
 ---
+class: center, middle
+# Bonus
+
+---
+## PhantomJS
+
+PhantomJS is a headless WebKit.
+
+You can run test with PhantomJS without GUI environment.
+
+Install [PhantomJS](http://phantomjs.org/) and set browser as "phantomjs" in "Open Browser" key word's 2nd argument.
+
+```
+Open Browser ${url} pantomjs
+```
+
+---
 # References
 
 - https://w3c.github.io/webdriver/webdriver-spec.html
@@ -417,6 +501,7 @@ Development - CI - QA
 - http://en.wikipedia.org/wiki/Specification_by_example
 - http://en.wikipedia.org/wiki/Don't_repeat_yourself
 - http://software-testing-tutorials-automation.blogspot.com/
+- http://phantomjs.org/
 
 
     </textarea>
@@ -427,4 +512,3 @@ Development - CI - QA
     </script>
   </body>
 </html>
-
