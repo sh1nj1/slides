@@ -232,24 +232,16 @@ Invalid_Login_Test
 ## Selenese
 
 Selenese is the set of Selenium commands.
-
 ### Commands
-
 - Actions
-  ```
-  ClickAndWait
-  Click
-  ```
+  - `clickAndWait`
+  - `click`
 - Accessors
-  ```
-  storeTextPresent: If text is found on the page then it stores the boolean value as true else store false.
-  storeElementPresent: If UI element is present on the page then it stores boolean value as true else stores false.
-  ```
+  - `storeTextPresent`
+  - `storeElementPresent`
 - Assertions
-  ```
-  verifyTitle
-  assertText
-  ```
+  - `verifyTitle`
+  - `assertText`
 
 [Selenese Command Reference](http://release.seleniumhq.org/selenium-core/1.0.1/reference.html)
 
@@ -500,9 +492,9 @@ PhantomJS is a headless WebKit.
 
 You can run tests with PhantomJS without GUI environment.
 
-Install [PhantomJS](http://phantomjs.org/) and set browser as "phantomjs" in "Open Browser" key word's 2nd argument.
+Install [PhantomJS](http://phantomjs.org/) and set browser as "phantomjs" in "Open Browser" keyword's 2nd argument.
 
-- Ubuntu - 
+- Ubuntu -
   `sudo apt-get install phantomjs`
 - Mac -
   `brew install phantomjs`
@@ -510,7 +502,7 @@ Install [PhantomJS](http://phantomjs.org/) and set browser as "phantomjs" in "Op
 ```
 Open Browser ${url} phantomjs
 ```
-You can run demo with PhantomJS without change test resource file.
+You can run demo with PhantomJS without changing test resource file.
 ```
 pybot --variable BROWSER:phantomjs login_tests
 ```
