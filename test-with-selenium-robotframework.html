@@ -34,6 +34,8 @@
         color: red;
         margin-left: auto;
         margin-right: auto;
+        width: 100%;
+        text-align: center;
       }
       .footnote {
         position: absolute;
@@ -61,6 +63,14 @@
         float: right;
         vertical-align: top;
       }
+      .cake-is-a-lie {
+        color: #fafafa;
+      }
+
+      img[alt="DemoApp-Login"] {
+        max-width:  400px;
+        display: block;
+      }
     </style>
   </head>
   <body>
@@ -71,7 +81,7 @@ class: center, middle
 # Tests With Selenium and RobotFramework
 
 .footnote[
-  by [Soonoh+]()
+  by [Soonoh+](http://google.com/+SoonohJung)
 ]
 ---
 layout: false
@@ -82,13 +92,13 @@ class: center, middle
 ## Everyone has their own documents
 
 - Product Manager - Specs
-- Project Manager - Planning matrix. Meeting notes.
-- QA - Test cases, Test reports.
-- Developer - Issues on issue manager.
+- Project Manager - Planning matrix. Meeting notes
+- QA - Test cases, Test reports
+- Developer - Issues on issue manager
 
 ---
 class: center, middle
-.key-idea[Define Single Source of Truth.]
+.key-idea[Define Single Source of Truth]
 
 ---
 ## Blocking others
@@ -108,21 +118,19 @@ class: center, middle
 
 ---
 class: center, middle
-.key-idea[Automate Tests, Reproduce every time.]
+.key-idea[Automate Tests, Reproduce every time]
 
 ---
 class: center, middle
-# Demo app
+# Prepare Demo App
 
 ---
 ## Installation
 
-https://bitbucket.org/robotframework/webdemo/wiki/Home
+This [Demo App](https://bitbucket.org/robotframework/webdemo/wiki/Home) provided by RobotFramework as an example.
 
-For easy installation, use chocolatey in Windows.
+For easy installation, use [Chocolatey](http://chocolatey.org) in Windows.
 Install Python 2.7 or higher (Tested 2.7 in Windows 7)
-
-chocolatey.org
 
 ```
 @powershell -NoProfile -ExecutionPolicy unrestricted
@@ -134,21 +142,23 @@ cinst python
 cinst easy.install
 cinst pip
 ```
----
-Clone example
-
+Clone demo app from git repository.
 ```
 $ git clone https://bitbucket.org/robotframework/webdemo.git
+```
+---
+# Demo App
+```
 $ cd webdemo
 $ python demoapp/server.py
 Demo server starting on port 7272.
 ```
-Open demo app in Firefox browser
-http://localhost:7272
+Open url http://localhost:7272 in Firefox browser.
+It has a simple login screen. A valid ID and Password are "demo" and "mode".
 
-![alt text](https://bitbucket.org/robotframework/webdemo/wiki/demoapp.png "Demo App - Login")
+![DemoApp-Login](https://bitbucket.org/robotframework/webdemo/wiki/demoapp.png)
 
-We will continue with this webdemo app later.
+We will continue with this demo app later.
 
 ---
 class: center, middle
@@ -170,33 +180,25 @@ Selenium IDE is a Firefox browser plugin.
 - Record & Run Tests
 - Auto Locator, Command Manual
 
-[User Manual](http://docs.seleniumhq.org/docs/02_selenium_ide.jsp)
+There is a very good [User Manual](http://docs.seleniumhq.org/docs/02_selenium_ide.jsp)
 
 ---
 ## Installing
 
 - open following URL in Firefox browser
-
-http://release.seleniumhq.org/selenium-ide/2.8.0/selenium-ide-2.8.0.xpi
-
+  http://release.seleniumhq.org/selenium-ide/2.8.0/selenium-ide-2.8.0.xpi
 - Or find and click the latest version in download screen
-
-http://www.seleniumhq.org/download/
-
+  http://www.seleniumhq.org/download/
 - After installing, click Selenium IDE icon on the right top corner of the Firefox browser.
-
 - Check out detailed installation process:
-
-http://www.askqtp.com/2013/02/how-to-install-selenium-ide-in-firefox.html
+  http://www.askqtp.com/2013/02/how-to-install-selenium-ide-in-firefox.html
 
 ---
 ## Building Test Cases
 
 Let's go back to our demo app.
 
-Watch the video how to make and run tests.
-
-http://www.youtube.com/watch?v=oIkjFEKnlPs
+[Watch demo video](http://www.youtube.com/watch?v=oIkjFEKnlPs) how to make and run tests.
 
 [![Selenium IDE Demo](http://img.youtube.com/vi/oIkjFEKnlPs/0.jpg)](http://www.youtube.com/watch?v=oIkjFEKnlPs)
 
@@ -254,45 +256,55 @@ Selenese is the set of Selenium commands.
 ---
 ### Syntax
 
-Selenium scripts that will be run from Selenium-IDE will be stored in an HTML text file format. This consists of an HTML table with three columns.
+Selenium Tests from Selenium-IDE will be stored in an HTML text file format.
+This consists of a HTML table with three columns.
 
-command, target, value
+Command, Target and Value (Actually latter two are same level of arguments of the command)
 
-target is usually Locator
+Target is usually a Locator locating an Element in HTML.
+If it is `@id` or `@name` attribute it can be simply used as its value.
+
+```html
+<input type="submit" name="submit_button" />
+```
+
+| Command | Target        | Value  |
+|---------|---------------|--------|
+| click   | submit_button | &nbsp; |
+
 ---
 ### Locator
 
 .left-column[
-Identifier
+- Identifier
   ```
   identifier=loginForm
   loginForm
   ```
-Id
+- Id
   ```
   id=loginForm
   ```
-Name
+- Name
   ```
   name=username
   ```
-XPath
+- XPath
   ```
   xpath=/html/bodoy/form[1]
   //input[@name='username']
   ```
-
 ]
 .right-column[
-Link Text
+- Link Text
   ```
   link=Continue
   ```
-DOM
+- DOM
   ```
   dom=document.getElementById('loginForm')
   ```
-CSS
+- CSS
   ```
   css=form#loginForm
   ```
@@ -329,18 +341,13 @@ pip install robotframework-selenium2library
 
 ---
 ## Demo
-
-Let's go back to our demo app and run RobotFramework tests.
-
-Video
-
-http://www.youtube.com/watch?v=-_Qw66HDRFs
-
-[![RobotFramework Demo](http://img.youtube.com/vi/-_Qw66HDRFs/0.jpg)](http://www.youtube.com/watch?v=-_Qw66HDRFs)
-
+To run RobotFramework tests, run following command in demp app directory.
 ```
 pybot login_tests/
 ```
+[Watch Demo Video](http://www.youtube.com/watch?v=-_Qw66HDRFs)
+
+[![RobotFramework Demo](http://img.youtube.com/vi/-_Qw66HDRFs/0.jpg)](http://www.youtube.com/watch?v=-_Qw66HDRFs)
 
 ---
 ## Test Case
@@ -418,10 +425,8 @@ Welcome Page Should Be Open
     Title Should Be    Welcome Page
 ```
 
-Selenium2Library Keywords References:
-
-http://rtomac.github.io/robotframework-selenium2library/doc/Selenium2Library.html#Wait%20Until%20Page%20Contains
-
+[Selenium2Library Keywords References](http://rtomac.github.io/robotframework-selenium2library/doc/Selenium2Library.html#Wait%20Until%20Page%20Contains
+)
 ---
 class: center, middle
 # Implementation in Small Team
@@ -457,9 +462,16 @@ Just Put Two Cents In
 ---
 ## Concurrent engineering
 
-Spec - Examples - Test Case (Single Source of Truth)
+.key-idea[Spec - Examples - Test Case
 
-Development - CI - QA
+(Single Source of Truth)]
+
+.key-idea[Development - CI - QA
+
+]
+
+---
+## Practices
 
 - Keep track test files with VCS.
   ```
@@ -470,23 +482,37 @@ Development - CI - QA
 ```
 - Share tests to all staffs. Everyone can reproduce exactly.
 - Run Acceptance Test at every night.
-- Development progress = How many tests passed
+- Development progress = How many tests passed.
 
 ---
 class: center, middle
-# Bonus
+
+<!--
+background-image: url(http://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Cakeisalie.svg/240px-Cakeisalie.svg.png)
+-->
+# A Cake
+.cake-is-a-lie[is a lie.]
 
 ---
 ## PhantomJS
 
 PhantomJS is a headless WebKit.
 
-You can run test with PhantomJS without GUI environment.
+You can run tests with PhantomJS without GUI environment.
 
 Install [PhantomJS](http://phantomjs.org/) and set browser as "phantomjs" in "Open Browser" key word's 2nd argument.
 
+- Ubuntu - 
+  `sudo apt-get install phantomjs`
+- Mac -
+  `brew install phantomjs`
+
 ```
-Open Browser ${url} pantomjs
+Open Browser ${url} phantomjs
+```
+You can run demo with PhantomJS without change test resource file.
+```
+pybot --variable BROWSER:phantomjs login_tests
 ```
 
 ---
