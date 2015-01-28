@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tests With Selenium and RobotFramework</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Roboto);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      table, th, td {
+        border: 1px solid black;
+      }
+      h1, h2, h3 {
+        font-family: 'Roboto';
+        font-weight: normal;
+      }
+      .footnote {
+        float: right
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .impact {
+        color: blue;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+layout: true
+class: center, middle
+---
+# Tests With Selenium and RobotFramework
+
+.footnote[by Soonoh]
+---
+layout: false
+# Issues
+
+## Everyone has their own documents
+
+- Product Manager - Specs
+- Project Manager - Planning matrix. Meeting notes.
+- QA - Test cases, Test reports.
+- Developer - Issues on issue manager.
+
+=> Define Single Source of Truth.
+
+---
+## Blocking others
+
+- QA - The product is not ready to test.
+- Developer - The spec is not enough to implement.
+
+=> Work concurrently and collaboratively
+
+---
+## Not Automated, not repetitive
+
+- Developer - How can I reproduce?
+- QA - Blah, blah, ... well... I am not sure.
+
+=> Automate Tests, Reproduce every time.
+---
+# Demo app
+
+https://bitbucket.org/robotframework/webdemo/wiki/Home
+
+## Installation
+
+For easy installation, use chocolatey in Windows.
+Install Python 2.7 or higher (Tested 2.7 in Windows 7)
+
+chocolatey.org
+
+```
+@powershell -NoProfile -ExecutionPolicy unrestricted
+-Command "iex ((new-object net.webclient)
+.DownloadString('https://chocolatey.org/install.ps1'))"
+&& SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+cinst msysgit
+cinst python
+cinst easy.install
+cinst pip
+```
+---
+Clone example
+
+```
+$ git clone https://bitbucket.org/robotframework/webdemo.git
+$ cd webdemo
+$ python demoapp/server.py
+Demo server starting on port 7272.
+```
+Open demo app in Firefox browser
+http://localhost:7272
+
+![alt text](https://bitbucket.org/robotframework/webdemo/wiki/demoapp.png "Demo App - Login")
+
+We will continue with this webdemo app later.
+
+---
+# Selenium
+
+Browser automation framework.
+
+- Selenium IDE
+- Selenium WebDriver (java, python, ruby, ...)
+- Selenium Server
+
+---
+## WebDriver
+
+This specification defines the WebDriver API, a platform and language-neutral interface and associated wire protocol that allows programs or scripts to introspect into, and control the behaviour of, a web browser.
+
+---
+## Selenium IDE (Manual: http://docs.seleniumhq.org/docs/02_selenium_ide.jsp)
+
+Selenium IDE is a Firefox browser plugin.
+
+---
+### Installing
+
+- open following URL in Firefox browser
+
+http://release.seleniumhq.org/selenium-ide/2.8.0/selenium-ide-2.8.0.xpi
+
+- Or find and click the latest version in download screen
+
+http://www.seleniumhq.org/download/
+
+- After installing, click Selenium IDE icon on the right top corner of the Firefox browser.
+
+- Check out detailed installation process:
+
+http://www.askqtp.com/2013/02/how-to-install-selenium-ide-in-firefox.html
+
+---
+### Building Test Cases
+
+Let's go back to our demo app.
+
+Watch the video how to make and run tests.
+
+http://www.youtube.com/watch?v=oIkjFEKnlPs
+
+[![Selenium IDE Demo](http://img.youtube.com/vi/oIkjFEKnlPs/0.jpg)](http://www.youtube.com/watch?v=oIkjFEKnlPs)
+
+---
+
+Valid_Login_Test
+
+|  Command           | Target            | Value                                            |
+|--------------------|-------------------|--------------------------------------------------|
+| open               | /                 |                                                  |
+| type               | id=username_field | demo                                             |
+| type               | id=password_field | mode                                             |
+| clickAndWait       | id=login_button   |                                                  |
+| verifyTitle        | Welcome Page      |                                                  |
+| verifyText         | css=p             | Login succeeded. Now you can logout.             |
+| verifyText         | link=logout       | logout                                           |
+| clickAndWait       | link=logout       |                                                  |
+
+Invalid_Login_Test
+
+|  Command           | Target            | Value                                            |
+|--------------------|-------------------|--------------------------------------------------|
+| open               | /                 |                                                  |
+| type               | id=username_field | invalid                                          |
+| type               | id=password_field | invalid                                          |
+| clickAndWait       | id=login_button   |                                                  |
+| verifyTitle        | Error Page        |                                                  |
+| verifyText         | css=p             | Login failed. Invalid user name and/or password. |
+
+---
+### Selenese
+
+Selenese is the set of Selenium commands.
+
+#### Commands
+
+- Actions
+  ```
+  ClickAndWait
+  Click
+  ```
+- Accessors
+  ```
+  storeTextPresent: If text is found on the page then it stores the boolean value as true else store false.
+  storeElementPresent: If UI element is present on the page then it stores boolean value as true else stores false.
+  ```
+- Assertions
+  ```
+  verifyTitle
+  assertText
+  ```
+
+[Selenese Command Reference](http://release.seleniumhq.org/selenium-core/1.0.1/reference.html)
+
+---
+#### Syntax
+
+Selenium scripts that will be run from Selenium-IDE will be stored in an HTML text file format. This consists of an HTML table with three columns.
+
+command, target, value
+
+target is usually Locator
+---
+Locator
+
+- Identifier
+  ```
+  identifier=loginForm
+  loginForm
+  ```
+- Id
+  ```
+  id=loginForm
+  ```
+- Name
+  ```
+  name=username
+  ```
+- XPath
+  ```
+  xpath=/html/bodoy/form[1]
+  //input[@name='username']
+  ```
+- Link Text
+  ```
+  link=Continue
+  ```
+- DOM
+  ```
+  dom=document.getElementById('loginForm')
+  ```
+- CSS
+  ```
+  css=form#loginForm
+  ```
+---
+# Robot Framework
+
+Robot Framework is a generic open source test automation framework for acceptance testing and acceptance test-driven development (ATDD). It has easy-to-use tabular test data syntax and it utilizes the keyword-driven testing approach.
+
+---
+## Why Robot Framework
+
+- A generic test framework
+- Open sourced by Nokia in 2008
+- Keyword driven and Easy to understand
+- Extensible via Python and Java
+- SBE
+- Logging, Screen shots, Reports, Tagging
+- Selenium2Labrary
+
+---
+Install RobotFramework and Selenium Library.
+```
+pip install robotframework
+pip install robotframework-selenium2library
+```
+
+---
+Demo
+
+Let's go back to our demo app and run RobotFramework tests.
+
+Video
+
+http://www.youtube.com/watch?v=-_Qw66HDRFs
+
+[![RobotFramework Demo](http://img.youtube.com/vi/-_Qw66HDRFs/0.jpg)](http://www.youtube.com/watch?v=-_Qw66HDRFs)
+
+```
+pybot login_tests/
+```
+
+---
+Test Case Example
+
+```ruby
+**** Settings ***
+Documentation     A test suite with a single test for valid login.
+...
+...               This test has a workflow that is created using keywords in
+...               the imported resource file.
+Resource          resource.txt
+
+**** Test Cases ***
+Valid Login
+    Open Browser To Login Page
+    Input Username    demo
+    Input Password    mode
+    Submit Credentials
+    Welcome Page Should Be Open
+    [Teardown]    Close Browser
+```
+---
+```ruby
+**** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Selenium2Library
+
+**** Variables ***
+${SERVER}         localhost:7272
+${BROWSER}        Firefox
+${DELAY}          0
+${VALID USER}     demo
+${VALID PASSWORD}    mode
+${LOGIN URL}      http://${SERVER}/
+${WELCOME URL}    http://${SERVER}/welcome.html
+${ERROR URL}      http://${SERVER}/error.html
+```
+---
+```ruby
+**** Keywords ***
+Open Browser To Login Page
+    Open Browser    ${LOGIN URL}    ${BROWSER}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Login Page Should Be Open
+
+Login Page Should Be Open
+    Title Should Be    Login Page
+
+Go To Login Page
+    Go To    ${LOGIN URL}
+    Login Page Should Be Open
+```
+---
+=> Keywords
+```ruby
+Input Username
+    [Arguments]    ${username}
+    Input Text    username_field    ${username}
+
+Input Password
+    [Arguments]    ${password}
+    Input Text    password_field    ${password}
+
+Submit Credentials
+    Click Button    login_button
+
+Welcome Page Should Be Open
+    Location Should Be    ${WELCOME URL}
+    Title Should Be    Welcome Page
+```
+
+Selenium2Library Keywords References:
+
+http://rtomac.github.io/robotframework-selenium2library/doc/Selenium2Library.html#Wait%20Until%20Page%20Contains
+
+---
+## Specification by example
+
+* Collaborative Approach
+* Using Realistic Examples
+* Creating a single source of truth
+
+---
+# Implementation in Small Team
+
+Practice SBE with Selenium IDE and RobotFramework.
+
+---
+## Roles
+
+- Product Manager
+
+  Writes specs that is easy to write tests (Some form of similar to Robot tests but not complete test form).
+
+- Software Tester
+
+  Writes test cases repetitively using Selenium IDE. QA Engineer or Developer do not need to ask how to reproduce.
+
+- QA Engineer
+
+  Convert selenium tests to Robot Framework tests. Complete spec as Acceptance tests with Robot framework.
+
+- Developer
+
+  Set good element ID in web elements for readable tests. Implement some custom test library.
+
+---
+## Concurrent engineering
+
+Spec - Examples - Test Case (Single Source of Truth)
+
+Development - CI - QA
+
+- Keep track test files with VCS.
+  ```
+  acceptance-test
+      src/test/java     - Custom Test Libraries
+          test/selenese - Selenium IDE tests(not acutal tests)
+          test/robot    - Acceptance Tests
+```
+- Share tests to all staffs. Everyone can reproduce exactly.
+- Run Acceptance Test at every night.
+- Development progress = How many tests passed
+
+---
+# References
+
+- https://w3c.github.io/webdriver/webdriver-spec.html
+- http://docs.seleniumhq.org/docs/02_selenium_ide.jsp
+- http://robotframework.org/
+- https://github.com/robotframework/robotframework
+- http://files.meetup.com/2719372/SJ-SELENIUM-MEETUP_20130325.pdf
+- http://specificationbyexample.com/key_ideas.html
+- http://en.wikipedia.org/wiki/Specification_by_example
+- http://en.wikipedia.org/wiki/Don't_repeat_yourself
+- http://software-testing-tutorials-automation.blogspot.com/
+
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
+
