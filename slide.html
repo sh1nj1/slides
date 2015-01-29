@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tests With Selenium and RobotFramework</title>
+    <title>Remark Slide Show</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
       @import url(http://fonts.googleapis.com/css?family=Roboto);
@@ -87,10 +87,21 @@
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
     </script>
     <script>
+      function getUrlParameter(sParam) {
+          var sPageURL = window.location.search.substring(1);
+          var sURLVariables = sPageURL.split('&');
+          for (var i = 0; i < sURLVariables.length; i++) {
+              var sParameterName = sURLVariables[i].split('=');
+              if (sParameterName[0] == sParam) {
+                  return sParameterName[1];
+              }
+          }
+      }
       var GITHUB_RAW_BASE_URL = 'https://rawgit.com/sh1nj1/slides/master';
+      var slide_url = GITHUB_RAW_BASE_URL + "/" + getUrlParameter('slideFile');
       $(document).ready(function() {
          $.ajax({
-             url : GITHUB_RAW_BASE_URL + "/test-with-selenium-robotframework.md",
+             url : slide_url,
              dataType: "text",
              success : function (data) {
                  $("#source").text(data);
