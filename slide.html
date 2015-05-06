@@ -77,10 +77,18 @@
         max-width:  400px;
         display: block;
       }
+
+      #controlContainer {
+        z-index: 999;
+        position: fixed;
+      }
+
     </style>
   </head>
   <body>
-    <button id="btnFullscreen" onClick="toggleFullscreen(this);">Fullscreen</button>
+    <div id="controlContainer">
+        <button onClick="toggleFullscreen(this);" style="opacity: 1.0">Toggle Fullscreen</button>
+    </div>
     <span id="source" ></span>
     <script src="https://rawgit.com/jpillora/xdomain/gh-pages/dist/0.6/xdomain.js"
           slave="https://rawgit.com/sh1nj1/slides/master/proxy.html"></script>
@@ -88,21 +96,16 @@
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
     </script>
     <script>
+	var slideShow;
+
 	function toggleFullscreen(buttonElement) {
-	  var doc = window.document;
-	  var docEl = doc.documentElement;
-
-	  var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-	  var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-
-	  if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-	    requestFullScreen.call(docEl);
-	    buttonElement.style.visibility = 'hidden';
+	  console.log(slideShow);
+	  if (buttonElement.style.opacity == 1.0) {
+	    buttonElement.style.opacity = 0.05;
+	  } else {
+	    buttonElement.style.opacity = 1.0;
 	  }
-	  else {
-	    cancelFullScreen.call(doc);
-	    buttonElement.style.visibility = 'visible';
-	  }
+	  slideShow.toggleFullscreen();
 	}
  	function getUrlParameter(sParam) {
           var sPageURL = window.location.search.substring(1);
@@ -114,6 +117,7 @@
             }
           }
 	}
+
 	var GITHUB_RAW_BASE_URL = 'https://rawgit.com/sh1nj1/slides/master';
 	var slide_url = GITHUB_RAW_BASE_URL + "/" + getUrlParameter('slideFile');
 	$(document).ready(function() {
@@ -122,7 +126,7 @@
             dataType: "text",
             success : function (data) {
               $("#source").text(data);
-              var slideshow = remark.create();
+              slideShow = remark.create({'ratio': '16:9'});
             }
           });
 	});
