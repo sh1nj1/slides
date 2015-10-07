@@ -1,0 +1,7 @@
+Use Chrome to test remote file.
+
+file:///path/slide.html?slideFile=devops-vision.md
+
+Use Firefox to test local file.
+
+file:///path/slide.html?slideFile=file://./devops-vision.md
