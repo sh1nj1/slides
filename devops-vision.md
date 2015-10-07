@@ -117,23 +117,13 @@ Stackoverflow
 ---
 기여하는 만큼 부여되는 권한
 ---
-# Vision 1
+---
+# Visions
 ---
 .impact[Keep team focused on creating business value, while we are concerning about everything else.]
----
 .impact[우리는 팀이 비지니스 가치를 창출에 집중하도록, 모든 다른 것에 집중한다.]
----
-# Vision 2
----
 .impact[Keep team sharable, motivated and efficient without concerning how to achieve it.]
----
 .impact[우리는 팀이 공유하고, 동기부여되고, 효율적으로 되도록, 그런 프로세스에 대해 고민할 필요가 없게 한다.]
 ---
-class: center, middle
-
-<!--
-background-image: url(http://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Cakeisalie.svg/240px-Cakeisalie.svg.png)
--->
-# A Cake
-.cake-is-a-lie[is a lie.]
+The Cake is not a lie
 ---
