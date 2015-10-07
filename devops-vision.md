@@ -25,9 +25,13 @@ class: center, middle
 ---
 # Vision 1
 ---
-.impact[Keep team focused on creating business value, while we are concerning about everything else.]
+Keep team focused on 
+.impact[creating business value], while we are concerning about 
+.impact[everything else.]
 ---
-.impact[우리는 팀이 비지니스 가치를 창출에 집중하도록, 모든 다른 것에 집중한다.]
+우리는 팀이 
+.impact[비지니스 가치]를 창출에 집중하도록, 
+.impact[다른 모든 것]에 집중한다.
 ---
 명확한 요구사항 정의
 ---
@@ -59,7 +63,7 @@ class: center, middle
 ---
 (일시적) 공유이다.
 ---
-링크를 까먹었다.
+링크를 잊어 버렸다.
 ---
 검색되지 않는다.
 ---
@@ -99,31 +103,52 @@ class: center, middle
 ---
 # Vision 2
 ---
-.impact[Keep team sharable, motivated and efficient without concerning how to achieve it.]
+Keep team 
+.impact[sharable], 
+.impact[motivated] and 
+.impact[efficient] without concerning how to achieve it.
 ---
-.impact[우리는 팀이 공유하고, 동기부여되고, 효율적으로 되도록, 그런 프로세스에 대해 고민할 필요가 없게 한다.]
+우리는 팀이 
+.impact[공유]하고, 
+.impact[동기부여]되고, 
+.impact[효율적]으로 되도록, 그런 프로세스에 대해 고민할 필요가 없게 한다.
 ---
 하나의 집단 지식 저장소
 ---
-일하고 싶게 만드는 시스템
----
-공정한 측정
----
 관리자 없는 관리
 ---
-자동 보고
+자동 생성되는 보고서
 ---
-Stackoverflow
+Stackoverflow System
+---
+기여하면 보상 받는 시스템
 ---
 기여하는 만큼 부여되는 권한
 ---
 ---
-# Visions
+# Our Visions
 ---
-.impact[Keep team focused on creating business value, while we are concerning about everything else.]
-.impact[우리는 팀이 비지니스 가치를 창출에 집중하도록, 모든 다른 것에 집중한다.]
-.impact[Keep team sharable, motivated and efficient without concerning how to achieve it.]
-.impact[우리는 팀이 공유하고, 동기부여되고, 효율적으로 되도록, 그런 프로세스에 대해 고민할 필요가 없게 한다.]
+우리는 팀이 
+.impact[비지니스 가치]를 창출에 집중하도록, 
+.impact[다른 모든 것]에 집중한다.
+
+우리는 팀이 
+.impact[공유]하고, 
+.impact[동기부여]되고, 
+.impact[효율적]으로 되도록, 그런 프로세스에 대해 고민할 필요가 없게 한다.
+---
+Keep team focused on 
+.impact[creating business value], while we are concerning about 
+.impact[everything else.]
+
+Keep team 
+.impact[sharable], 
+.impact[motivated] and 
+.impact[efficient] without concerning how to achieve it.
+---
+# 3
 ---
 The Cake is not a lie
 ---
+
+
