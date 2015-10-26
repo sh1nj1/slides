@@ -13,9 +13,11 @@ class: center, middle
 ---
 역활 - 개발자
 ---
-각종 리뷰 + 디자인 의뢰 + 시스템 설계 + 멘토 + 개발 서버 관리 + 제품 운영 + 제품 성능 테스트, …
+시스템 설계 + 디자인 의뢰 + 코드 리뷰 + 테스트 + 성능 개선 + 개발 서버 관리 + 서비스 운영 + …
 ---
 개발자의 가장 중요한 역활
+---
+개발
 ---
 개발 = 새로운 비지니스 가치 창출!
 ---
@@ -25,19 +27,13 @@ class: center, middle
 ---
 # Vision 1
 ---
-Keep team focused on 
-.impact[creating business value], while we are concerning about 
-.impact[everything else.]
----
 우리는 팀이 
-.impact[비지니스 가치]를 창출에 집중하도록, 
-.impact[다른 모든 것]에 집중한다.
+.impact[비지니스 가치]에 집중하도록,
+.impact[다른 모든 것]을 고민한다.
 ---
-명확한 요구사항 정의
+표준화된 개발 절차
 ---
-테스트 케이스의 작성과 공유
----
-코드 리뷰
+더 쉬운 개발 환경
 ---
 자동화된 배포
 ---
@@ -61,7 +57,7 @@ Keep team focused on
 ---
 공유가 되었다.
 ---
-(일시적) 공유이다.
+(일시적으로) 공유가 되었다.
 ---
 링크를 잊어 버렸다.
 ---
@@ -91,27 +87,18 @@ Keep team focused on
 ---
 
 ---
-일일 보고를 한다.
----
-관리자가 만든 표에 수치와 날짜를 입력한다.
----
 어떻게 평가되는게 공정한가?
 ---
-성과주의가 사람들에게 동기를 부여할까?
+어떻게 사람들에게 동기를 부여할까?
 ---
 우리는 일로부터 어떤 보상(정신적, 물질적)을 받기를 원하는가?
 ---
 # Vision 2
 ---
-Keep team 
-.impact[sharable], 
-.impact[motivated] and 
-.impact[efficient] without concerning how to achieve it.
----
 우리는 팀이 
-.impact[공유]하고, 
-.impact[동기부여]되고, 
-.impact[효율적]으로 되도록, 그런 프로세스에 대해 고민할 필요가 없게 한다.
+.impact[개방]되고,
+.impact[동기부여]되고,
+.impact[효율적]으로 되도록, 팀이 그런 프로세스에 대해 고민할 필요가 없게 한다.
 ---
 하나의 집단 지식 저장소
 ---
@@ -129,26 +116,14 @@ Stackoverflow System
 # Our Visions
 ---
 우리는 팀이 
-.impact[비지니스 가치]를 창출에 집중하도록, 
-.impact[다른 모든 것]에 집중한다.
+.impact[비지니스 가치]에 집중하도록,
+.impact[다른 모든 것]을 고민한다.
 
 우리는 팀이 
-.impact[공유]하고, 
-.impact[동기부여]되고, 
-.impact[효율적]으로 되도록, 그런 프로세스에 대해 고민할 필요가 없게 한다.
+.impact[개방]되고,
+.impact[동기부여]되고,
+.impact[효율적]으로 되도록, 팀이 그런 프로세스에 대해 고민할 필요가 없게 한다.
 ---
-Keep team focused on 
-.impact[creating business value], while we are concerning about 
-.impact[everything else.]
 
-Keep team 
-.impact[sharable], 
-.impact[motivated] and 
-.impact[efficient] without concerning how to achieve it.
----
-# 3
----
-The Cake is not a lie
----
 
 
