@@ -5,3 +5,9 @@ file:///path/slide.html?slideFile=devops-vision.md
 Use Firefox to test local file.
 
 file:///path/slide.html?slideFile=file://./devops-vision.md
+
+for firefox 68+
+
+about:config
+
+privacy.file_unique_origin = false
