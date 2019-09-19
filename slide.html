@@ -117,11 +117,6 @@
     <script>
 	var slideShow;
 
-    remark.macros.img = function (altText, width) {
-      var url = this;
-      return '<img alt="' + altText + '" src="' + url + '" style="width: ' + width + '" />';
-    };
-
 	function toggleFullscreen(buttonElement) {
 	  console.log(slideShow);
 	  if (buttonElement.style.opacity == 1.0) {
@@ -143,6 +138,12 @@
 	}
 
 	$(document).ready(function() {
+      
+      remark.macros.img = function (altText, width) {
+        var url = this;
+        return '<img alt="' + altText + '" src="' + url + '" style="width: ' + width + '" />';
+      };
+
 	  var GITHUB_RAW_BASE_URL = 'https://sh1nj1.github.io/slides/';
 	  var slide_url = getUrlParameter('slideFile');
 	  if (slide_url.startsWith("file://")) {
