@@ -377,7 +377,7 @@ Reactive-Stream 에서는 Operator 를 정의하지 않는다. 구현 벤더에 
 ---
 ### Scheduler 바꾸기
 
-* subscribeOn - 해당 stream 전체에 적용
+* subscribeOn - 해당 stream 전체에 적용 - 위치 상관없음
 * publishOn - 이후에 적용
 
 ---
@@ -430,7 +430,13 @@ public class HelloController {
     }
 }
 ```
+---
 
+* webmvc 모듈 dependency 추가했다면, @EnableWebFlux annotation 를 추가한다.
+* @RequestBody 는 Mono<T> 또는 Flux<T> 등을 사용하여 체인 연결하여 사용.
+* Mono<Void> 리턴 타입은 Mono 가 종료될때, 빈값을 리턴
+* Non-reactive 리턴 타입 void, T 등은 사용 가능하나, 싱크하게 호출되고 따라서 메쏘드 안에서 blocking 하면 안됨,
+  T 는 Mono 등으로 랩핑되서 async 하게 전송됨.
 ---
 
 ### Functional Endpoints
@@ -463,15 +469,22 @@ public class GreetingRouter {
 ```
 
 ---
+### Scheduled Task
+
+
+
+---
 # Tips
 ---
 
+* 반드시 jdbc 호출등과 같은 Blocking 작업은 Asynchronous 하게 랩핑해서 사용해야 함.
 * Subscribe 하기 전에는 아무것도 동작하지 않음.
 * Operator chain 이 끊어지면 안됨, 특히 flatMap 등을 쓸때.
 * operator, subscribe 안에서 다시 subscribe 하지 않기.
 * Publisher, Subscriber, Processor 를 직접만들어 쓸려고 하지 않기. (매우 힘듬)
 * Blocking Operation 은 Scheduler 를 통해 비동기적으로 처리해야 함.
 * Flux, Mono 등 Null 이 발생하면 안됨, 필요에 따라서는 Optional.of 등을 사용.
+* exception 이 발생하면 기본적으로 스트림이 종료됨, Flux, Mono 를 리턴하는 경우 Mono.error(e) 등으로 랩핑해서 리턴.
 * Mono.empty() 등 의 값이 리턴되면 그 이후 실행이 안됨.
 * Operator 의 정확한 구현을 알아야 한다. 그냥 유추해서 쓰면 문제
 * Akka streams, RxJava 등과 통합 가능
