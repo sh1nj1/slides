@@ -511,6 +511,7 @@ blocking 메쏘드를 Mono 등으로 감싸고, elastic 쓰레드 풀에서 작�
 * Mono.empty() 등 의 값이 리턴되면 그 이후 실행이 안됨.
 * Operator 의 정확한 구현을 알아야 한다. 그냥 유추해서 쓰면 문제
 * Akka streams, RxJava 등과 통합 가능
+* 개별 operator 블럭 안은 간결하게 유지한다.
 
 ---
 # Q & A
@@ -520,9 +521,11 @@ blocking 메쏘드를 Mono 등으로 감싸고, elastic 쓰레드 풀에서 작�
 * 언제 쓰는가?
 * 성능에 차이가 있는가?
 * Spring 의 Scheduler annotation 과의 통합 방법이 있는가?
+* 단점?
 
 ???
 * 왜? - 작은 단위로 이미 조합할 수 있는 operator 들로 학습만 되어 있다면 가독성밑 비지니스 로직 구현이 쉬움. 최신 하드웨어를 보다 더 효율적으로 사용, MSA 에 적합
+  클라우드 환경으로의 변화에 보다 많은 Network IO 필요.
 * Spring 의 다른 여버부분은 통합되어 있지 않음, @Scheduled 도 통합이 되어 있지 않음.
 ---
 # References
