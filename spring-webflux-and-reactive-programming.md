@@ -120,6 +120,19 @@ Asynchronous Stream Processing with Non-blocking Back Pressure
 
 ???
 CPU 가 막힘없이 일을 사용되느냐 마느냐의 문제
+
+---
+
+### Sync vs Async, Blocking vs Non-blocking
+
+Concurrency vs Parallelism
+
+???
+
+* Concurrency - 일정시간 동안의 동시처리
+* Parallelism - 말그대로 완전히 분리되어 동시에 동작
+* 효율 vs 비효율, parallelism 이 좋지만, 상대적으로 어렵고, 모든 것을 완전히 parallelise 하게 할 수 없다. 따라서 타협과 최적화 필요.
+
 ---
 ### Back Pressure
 
@@ -248,7 +261,8 @@ userService.getFavorites(userId)
 
 ???
 
-쉽게 데이터 흐름과 로직을 풍부한 operator 단어로 설명이 가능.
+* 쉽게 데이터 흐름과 로직을 풍부한 operator 단어로 설명이 가능.
+* 이상과 현실은 다름 :(
 
 ---
 
@@ -480,10 +494,6 @@ public class GreetingRouter {
 ```
 
 ---
-### Scheduled Task
-
-
----
 # Tips
 ---
 
@@ -512,6 +522,24 @@ blocking 메쏘드를 Mono 등으로 감싸고, elastic 쓰레드 풀에서 작�
 * Operator 의 정확한 구현을 알아야 한다. 그냥 유추해서 쓰면 문제
 * Akka streams, RxJava 등과 통합 가능
 * 개별 operator 블럭 안은 간결하게 유지한다.
+* `@Scheduled` `@Async` 다른 스프링 모듈과의 통합은 아직 안되고 있다.
+
+---
+
+# 생각
+
+---
+
+기존 방식이랑 양립하기 어렵다
+
+???
+
+* reactive-stream 방식으로 하기로 하면 모든 부분에서 바꿔야 하고 기존 스타일로 코드와 같이 존제하기 힘들다.
+* 따라서 충분한 사전 조기와 개념 정리, 검증, 학습 등이 필요
+
+---
+
+.impact[우연에 맡기는 프로그래밍을 하지 말자]
 
 ---
 # Q & A
@@ -520,18 +548,19 @@ blocking 메쏘드를 Mono 등으로 감싸고, elastic 쓰레드 풀에서 작�
 * 왜 쓰는가?
 * 언제 쓰는가?
 * 성능에 차이가 있는가?
-* Spring 의 Scheduler annotation 과의 통합 방법이 있는가?
 * 단점?
 
 ???
+
 * 왜? - 작은 단위로 이미 조합할 수 있는 operator 들로 학습만 되어 있다면 가독성밑 비지니스 로직 구현이 쉬움. 최신 하드웨어를 보다 더 효율적으로 사용, MSA 에 적합
   클라우드 환경으로의 변화에 보다 많은 Network IO 필요.
 * Spring 의 다른 여버부분은 통합되어 있지 않음, @Scheduled 도 통합이 되어 있지 않음.
+
 ---
 # References
 
 .center[
-* [Advanced Reactive Java](Advanced Reactive Java)
+* [Advanced Reactive Java](http://akarnokd.blogspot.com/2016/03/operator-fusion-part-1.html)
 * [Reactive Streams](https://www.reactive-streams.org/)
 * [Reactor 3 Reference Guide](https://projectreactor.io/docs/core/release/reference/)
 * [Spring WebFlux Documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html)
