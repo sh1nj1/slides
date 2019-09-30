@@ -145,7 +145,12 @@
       };
 
 	  var GITHUB_RAW_BASE_URL = 'https://sh1nj1.github.io/slides/';
-	  var slide_url = getUrlParameter('slideFile');
+      var slide_url = getUrlParameter('slideFile');
+      var ratio = getUrlParameter('ratio');
+      if (ratio == null) {
+        ratio = "16:9"
+      }
+      console.log("ratio=", ratio);
 	  if (slide_url.startsWith("file://")) {
 	    slide_url = slide_url.substring(7);
 	  } else {
@@ -156,7 +161,7 @@
             dataType: "text",
             success : function (data) {
               $("#source").text(data);
-              slideShow = remark.create({'ratio': '16:9'});
+              slideShow = remark.create({'ratio': ratio});
             }
           });
 	});
